@@ -1,0 +1,10 @@
+import wollok.game.*
+import auto.*
+
+program autitosGame {
+	game.width(14)
+	game.height(8)
+	 game.boardGround("empedrado.jpg")
+	game.addVisual(auto)
+	game.start()
+}
