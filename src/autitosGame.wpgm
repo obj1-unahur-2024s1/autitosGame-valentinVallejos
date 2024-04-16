@@ -4,7 +4,34 @@ import auto.*
 program autitosGame {
 	game.width(14)
 	game.height(8)
-	 game.boardGround("empedrado.jpg")
-	game.addVisual(auto)
+	game.boardGround("empedrado.jpg")
+	game.addVisual(autoRojo)
+	game.addVisual(autoAzul)
+	keyboard.right().onPressDo {autoRojo.moverALaDerecha()}
+	keyboard.left().onPressDo {autoRojo.moverALaIzquierda()}
+	keyboard.up().onPressDo {autoRojo.moverArriba()}
+	keyboard.down().onPressDo {autoRojo.moverAbajo()}
+	
+	keyboard.d().onPressDo {autoAzul.moverALaDerecha()}
+	keyboard.a().onPressDo {autoAzul.moverALaIzquierda()}
+	keyboard.w().onPressDo {autoAzul.moverArriba()}
+	keyboard.s().onPressDo {autoAzul.moverAbajo()}
+	
+	keyboard.space().onPressDo {
+		if (autoAzul.image() == "autitoAzul.png"){
+			autoAzul.image("autitoVerde.png")
+		}
+		else {
+			autoAzul.image("autitoAzul.png")
+		}
+	}
+	
+	game.whenCollideDo(autoRojo , { 
+		 elemento => elemento.moverALaIzquierda()
+		  game.say(autoRojo,autoRojo.pedirSeguro())
+	}  )
+	
+	game.onTick(2000, "movimiento", { autoAzul.movete() })	
+	
 	game.start()
 }
